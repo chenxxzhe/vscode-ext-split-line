@@ -3,7 +3,7 @@
 	"displayName": "split line",
 	"description": "split line into multiple lines",
 	"version": "0.1.0",
-	"publisher": "philozzz",
+	"publisher": "chenzhe",
 	"engines": {
 		"vscode": "^1.35.0"
 	},

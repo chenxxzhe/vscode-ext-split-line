@@ -1,26 +1,49 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
-import * as vscode from 'vscode';
+import * as vscode from 'vscode'
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-		console.log('Congratulations, your extension "split-line" is now active!');
+	const COMMAND = 'extension.splitLine'
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('extension.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
+	const createReg = (seq: string): RegExp => {
+		return new RegExp(`(^\\s+|${seq}|\\s+$)`, 'g')
+	}
 
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World!');
-	});
+	const commandHandler = async function (args: any) {
+		let seq: string | undefined
+		if (!args) {
+			seq = await vscode.window.showInputBox({
+				placeHolder: 'input separator for split'
+			})
+		} else {
+			seq = args.separator
+		}
+		seq = seq || ','
 
-	context.subscriptions.push(disposable);
+		let editor = vscode.window.activeTextEditor
+		if (!editor) { return }
+		const document = editor.document
+		const selection = editor.selection
+		const word = document.getText(selection)
+		if (!word.trim().length) { return }
+
+		// space in first or last will be converted into line break
+		const lines = word.replace(createReg(seq), (match: string): string => {
+			if (match.trim().length) { return seq + '\n'}
+			return '\n'
+		})
+		await editor.edit(builder => {
+			builder.replace(selection, lines)
+		})
+
+		await vscode.commands.executeCommand(
+			'editor.action.formatSelection', 
+			document.uri,
+			selection,
+		)
+		
+	}
+	let disposable = vscode.commands.registerCommand(COMMAND, commandHandler)
+	context.subscriptions.push(disposable)
 }
 
 // this method is called when your extension is deactivated

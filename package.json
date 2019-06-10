@@ -2,7 +2,8 @@
 	"name": "split-line",
 	"displayName": "split-line",
 	"description": "split line into multiple lines",
-	"version": "0.0.1",
+	"version": "0.1.0",
+	"publisher": "philozzz",
 	"engines": {
 		"vscode": "^1.35.0"
 	},
@@ -10,13 +11,20 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.helloWorld"
+		"onCommand:extension.splitLine"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [{
-			"command": "extension.helloWorld",
-			"title": "Hello World"
+			"command": "extension.splitLine",
+			"title": "split line"
+		}],
+		"keybindings": [{
+			"command": "extension.splitLine",
+			"key": "ctrl+alt+s",
+			"mac": "ctrl+cmd+s",
+			"when": "editorTextFocus && !editorReadonly",
+			"args": { "separator": "," }
 		}]
 	},
 	"scripts": {

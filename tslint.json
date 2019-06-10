@@ -7,9 +7,12 @@
 		"class-name": true,
 		"semicolon": [
 			true,
-			"always"
+			"never"
 		],
 		"triple-equals": true
 	},
-	"defaultSeverity": "warning"
+	"defaultSeverity": "warning",
+	"linterOptions": {
+		"exclude": ["node_modules"]
+	}
 }

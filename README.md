@@ -4,7 +4,7 @@ split one line into multiple lines by custom separator (default: ',')
 
 ## Features
 
-![intro](images/split-line-intro.gif)
+![Screenshot](images/split-line-intro.gif "split line")
 
 ## How to use
 
@@ -14,8 +14,6 @@ split one line into multiple lines by custom separator (default: ',')
 
 ## Known Issues
 
-I don't know how to format selection after split.
-If you know, please tell me.
 
 ## TODO
 

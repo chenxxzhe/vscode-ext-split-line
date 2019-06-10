@@ -1,6 +1,6 @@
 {
 	"name": "split-line",
-	"displayName": "split-line",
+	"displayName": "split line",
 	"description": "split line into multiple lines",
 	"version": "0.1.0",
 	"publisher": "philozzz",
@@ -40,5 +40,9 @@
 		"tslint": "^5.12.1",
 		"@types/node": "^10.12.21",
 		"@types/mocha": "^2.2.42"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/chenxxzhe/vscode-ext-split-line"
 	}
 }

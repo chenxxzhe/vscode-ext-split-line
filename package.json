@@ -15,17 +15,23 @@
 	],
 	"main": "./out/extension.js",
 	"contributes": {
-		"commands": [{
-			"command": "extension.splitLine",
-			"title": "split line"
-		}],
-		"keybindings": [{
-			"command": "extension.splitLine",
-			"key": "ctrl+alt+s",
-			"mac": "ctrl+cmd+s",
-			"when": "editorTextFocus && !editorReadonly",
-			"args": { "separator": "," }
-		}]
+		"commands": [
+			{
+				"command": "extension.splitLine",
+				"title": "split line"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "extension.splitLine",
+				"key": "ctrl+alt+s",
+				"mac": "ctrl+cmd+s",
+				"when": "editorTextFocus && !editorReadonly",
+				"args": {
+					"separator": ","
+				}
+			}
+		]
 	},
 	"scripts": {
 		"vscode:prepublish": "yarn run compile",

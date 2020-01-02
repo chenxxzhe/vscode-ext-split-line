@@ -2,7 +2,7 @@
 	"name": "split-line",
 	"displayName": "split line",
 	"description": "split line into multiple lines",
-	"version": "0.1.1",
+	"version": "1.0.0",
 	"publisher": "chenzhe",
 	"engines": {
 		"vscode": "^1.35.0"

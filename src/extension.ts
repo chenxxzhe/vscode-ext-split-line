@@ -1,23 +1,39 @@
 import * as vscode from 'vscode'
+import splitIntoLines from './split'
 
 export function activate(context: vscode.ExtensionContext) {
 
 	const COMMAND = 'extension.splitLine'
 
-	const createReg = (seq: string): RegExp => {
-		return new RegExp(`(^\\s+|${seq}|\\s+$)`, 'g')
-	}
+	const OPT_BREAK_START_END = 'breakStartEnd'
+	const OPT_BREAK_BEFORE = 'breakBeforeSeparator'
 
 	const commandHandler = async function (args: any) {
-		let seq: string | undefined
+		let sep: string | undefined
+		let breakStartEnd: boolean = false
+		let breakBeforeSeparator: boolean = false
+		
 		if (!args) {
-			seq = await vscode.window.showInputBox({
-				placeHolder: 'input separator for split'
+			sep = await vscode.window.showInputBox({
+				placeHolder: 'input separator for split.'
 			})
+			const optionSelected = await vscode.window.showQuickPick(
+				[
+					{label: OPT_BREAK_START_END, description: 'break line in the start and end of selected string'},
+					{label: OPT_BREAK_BEFORE, description: 'break line before separator'},
+				],
+				{
+					canPickMany: true,
+					placeHolder: 'choose break line option.'
+				}
+			) || []
+			breakStartEnd = optionSelected.some((opt) => opt.label === OPT_BREAK_START_END)
+			breakBeforeSeparator = optionSelected.some((opt) => opt.label === OPT_BREAK_BEFORE)
 		} else {
-			seq = args.separator
+			sep = args.separator
+			breakStartEnd = args.breakStartEnd
 		}
-		seq = seq || ','
+		sep = sep || ','
 
 		let editor = vscode.window.activeTextEditor
 		if (!editor) { return }
@@ -25,12 +41,12 @@ export function activate(context: vscode.ExtensionContext) {
 		const selection = editor.selection
 		const word = document.getText(selection)
 		if (!word.trim().length) { return }
-
-		// space in first or last will be converted into line break
-		const lines = word.replace(createReg(seq), (match: string): string => {
-			if (match.trim().length) { return seq + '\n'}
-			return '\n'
+		
+		const lines = splitIntoLines(word, sep, {
+			breakStartEnd,
+			breakBeforeSeparator,
 		})
+
 		await editor.edit(builder => {
 			builder.replace(selection, lines)
 		})

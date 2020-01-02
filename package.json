@@ -28,7 +28,18 @@
 				"mac": "ctrl+cmd+s",
 				"when": "editorTextFocus && !editorReadonly",
 				"args": {
-					"separator": ","
+					"separator": ",",
+					"breakStartEnd": false
+				}
+			},
+			{
+				"command": "extension.splitLine",
+				"key": "ctrl+alt+x",
+				"mac": "ctrl+cmd+x",
+				"when": "editorTextFocus && !editorReadonly",
+				"args": {
+					"separator": ",",
+					"breakStartEnd": true
 				}
 			}
 		]

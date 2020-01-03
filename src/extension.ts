@@ -17,6 +17,8 @@ export function activate(context: vscode.ExtensionContext) {
 			sep = await vscode.window.showInputBox({
 				placeHolder: 'input separator for split.'
 			})
+			if (!sep) { return }
+
 			const optionSelected = await vscode.window.showQuickPick(
 				[
 					{label: OPT_BREAK_START_END, description: 'break line in the start and end of selected string'},
@@ -30,10 +32,10 @@ export function activate(context: vscode.ExtensionContext) {
 			breakStartEnd = optionSelected.some((opt) => opt.label === OPT_BREAK_START_END)
 			breakBeforeSeparator = optionSelected.some((opt) => opt.label === OPT_BREAK_BEFORE)
 		} else {
-			sep = args.separator
-			breakStartEnd = args.breakStartEnd
+			sep = args.separator || ','
+			breakStartEnd = !!args.breakStartEnd
+			breakBeforeSeparator = !!args.breakBeforeSeparator
 		}
-		sep = sep || ','
 
 		let editor = vscode.window.activeTextEditor
 		if (!editor) { return }

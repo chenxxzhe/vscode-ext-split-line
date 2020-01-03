@@ -19,6 +19,7 @@ so don't select the outermost brackets
 2. hot key: `ctrl + cmd + s` in mac or `ctrl + alt + s` in win, (use default separator, ',')
 3. hot key: `ctrl + cmd + x` in mac or `ctrl + alt + x` in win, (use default separator, ',' , break line in start and end of selected string (`breakStartEnd: true`))
 4. you could configure keybindings `"extension.splitLine"` to change default separator in `args`
+5. args has follow options: `separator: string`, `breakStartEnd: boolean`, `breakBeforeSeparator: boolean` 
 
 ## Known Issues
 

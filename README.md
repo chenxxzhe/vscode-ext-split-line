@@ -21,10 +21,17 @@ so don't select the outermost brackets
 4. you could configure keybindings `"extension.splitLine"` to change default separator in `args`
 5. args has follow options: `separator: string`, `breakStartEnd: boolean`, `breakBeforeSeparator: boolean` 
 
-## Known Issues
+example: you can set hotkey in vscode `keybindings.json` like this:
+```json
+{
+    "key": "ctrl+cmd+x",
+    "command": "extension.splitLine",
+    "when": "editorTextFocus && !editorReadonly",
+    "args": {
+      "separator": " ",
+      "breakStartEnd": true,
+      "breakBeforeSeparator": false
+    }
+}
+```
 
-
-## TODO
-
-- [x] format after split
-- [ ] test coverage

@@ -39,7 +39,7 @@ export default function splitIntoLines(
 
 const startBracketReg = /[\{\[\(]/
 const endBracketReg = /[\}\]\)]/
-const quoteReg = /'"`/
+const quoteReg = /['"`]/
 
 /** only find separator which is not inside {} [] () '' "" `` */
 function findValidSeparator(str: string, sep: string): number[] {
